@@ -407,6 +407,10 @@ img#long-logo {
   font-weight: bold;
 }
 
+#layout.sidebar-open #demo.open .wrapper a:hover {
+background-color: transparent ;
+}
+
 #layout.sidebar-open span.song-ref {
   color: var(--jupiterbyrd-orange);
 }
