@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Jupiterbyrd, the Artist</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="icons/star.png" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/vaakash/socializer@master/css/socializer.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <img id="filter" src="icons/star.png" />
+    <!-- <img id="grainFilter" class="backImage" src="noisy-background.jpg" />-->
+
+    <!--<aside>
+        <h1>The Byrd House</h1>
+        <h2>by Jupiterbyrd</h2>
+        <div id="parameterMenu">
+            <textarea autocomplete="on" autofocus="on" id="prompt">What's on your mind?</textarea>  
+        </div>
+        <button id="drawButton">Draw Spiro</button>
+    </aside>-->
+    <div id="layout">
+      <!-- Shelf on the left -->
+      <div id="main-menu">
+        <div id="menu-player" class="player horizontal big">
+          <div class="wrapper">
+            <div class="info-wrapper">
+              <div class="info">
+                <h4>BEDROOM<br />sweetly sick day</h4>
+                <span>Jupiterbyrd</span>
+              </div>
+            </div>
+
+            <audio id="demoAudio" src="audio/bedroom.wav"></audio>
+            <div id="player-details">
+              <div class="controls">
+                <button id="restartBtn">
+                  ⏮ <span class="text">Restart</span>
+                </button>
+                <button id="playBtn">▶ <span class="text">Play</span></button>
+                <button id="pauseBtn">⏸ <span class="text">Pause</span></button>
+              </div>
+
+              <div id="progressContainer" class="progress-container">
+                <div id="progressBar"></div>
+                <img
+                  id="progressHandle"
+                  src="icons/5star.png"
+                  alt="Slider Handle"
+                  style="filter: invert(100%)"
+                />
+              </div>
+
+              <div class="time-info">
+                <span id="currentTime">00s</span><span class="text"> / </span>
+                <span id="totalTime" class="text">0s</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <img
+          id="long-logo"
+          src="images/jupiterbyrd-logo-long-outline.svg"
+          alt="Jupiterbyrd Logo"
+        />
+        <header>
+          <!-- <model-viewer
+            src="models/jupiter.glb"
+            alt="A 3D model"
+            auto-rotate
+            ar
+          ></model-viewer>-->
+        </header>
+
+        <nav>
+          <ul>
+            <li>
+              <button
+                id="synopsis-menu"
+                onclick="openMagazine('synopsis')"
+                class="menu-button"
+              >
+                About me
+              </button>
+            </li>
+            <li>
+              <button
+                id="demo-menu"
+                onclick="openMagazine('demo')"
+                class="menu-button"
+              >
+                Demo
+              </button>
+            </li>
+            <li>
+              <button
+                id="lyrics-menu"
+                onclick="openMagazine('lyrics')"
+                class="menu-button"
+              >
+                Lyrics
+              </button>
+            </li>
+            <li>
+              <button
+                id="music-menu"
+                onclick="openMagazine('music')"
+                class="menu-button"
+              >
+                Discography
+              </button>
+            </li>
+            <li>
+              <button
+                id="visuals-menu"
+                onclick="openMagazine('visuals')"
+                class="menu-button"
+              >
+                Visuals
+              </button>
+            </li>
+
+            <li>
+              <button
+                id="connect-menu"
+                onclick="openMagazine('connect')"
+                class="menu-button"
+              >
+                Connect
+              </button>
+            </li>
+            <li>
+              <button
+                id="upcoming-menu"
+                onclick="openMagazine('upcoming')"
+                class="menu-button"
+              >
+                Current Projects
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Sidebar for flipbook on the right -->
+      <div id="sidebar">
+        <div id="sidebar-header">
+          <span> </span>
+          <button id="close-button" onclick="closeSidebar()">close x</button>
+        </div>
+        <div class="body-item" id="demo">
+          <div class="wrapper">
+            <button onclick="openMagazine('lyrics')">
+              <img id="vinyl" src="icons/vinyl.png" alt="vinyl" style="" />
+              <br />Open Lyrics
+            </button>
+            <div>
+              <h3>Overview</h3>
+              <ul>
+                <li>
+                  <h5>Name:</h5>
+                  BEDROOM sweetly sick day
+                </li>
+                <li>
+                  <h5>Length:</h5>
+                  4 min 32 sec
+                </li>
+                <li>
+                  <h5>Genre:</h5>
+                  Art Pop, Electronica
+                </li>
+                <li>
+                  <h5>Tempo:</h5>
+                  120bpm
+                </li>
+                <li>
+                  <h5>Writer:</h5>
+                  Jupiterbyrd
+                </li>
+                <li>
+                  <h5>Producer:</h5>
+                  Jupiterbyrd
+                </li>
+              </ul>
+            </div>
+            <button>download audio</button><br />
+          </div>
+          <main>
+            <h2>BEDROOM sweetly sick day</h2>
+            <h4>Hi Quiet Life Co Team!</h4>
+            <br />
+
+            <p>
+              This song explores Byung-Chul Han's concept of the
+              <strong>achievement-subject</strong> from his book,
+              <a
+                href="https://www.sup.org/books/theory-and-philosophy/burnout-society"
+                >The Burnout Society</a
+              >. The speaker is a citizen of the 21<span class="superscript"
+                >st</span
+              >
+              century, kitted out with inmmensely powerful technology that's
+              become unbiquitous. Most importantly, they have the freedom to be
+              who they want to be.
+            </p>
+            <br />
+            <p>
+              Full of reverb and looming with all the sinister spirit of witchy
+              chants in the night, the speaker is haunted by The Four Horsemen:
+              Serotonin, Oxytocin, Endorphins and Dopamine meant to bring Eden
+              on Earth. I mean they are the feel-good chemicals so what is Eden
+              if not constant, never-ending good feelings? Right? More so in a
+              world where the sounds of ukuleles are so processed they sound
+              like gritty guitars. It's clear the speaker feels like a god!<br />
+            </p>
+            <p>
+              But it's all wrong. Physically, the speaker knows it. They are
+              enundated by grotesque symptoms. The oversaturation of feeling is
+              "tickling flesh and tissues" and "pickling blood and body". This
+              is a piece of body horror. It's clear in the synthy bell that
+              carries a sweetness that grows ironic over the course of the song.
+              This is about a sickness, an illness of "too-much-sameness" as
+              Byung-Chul Han calls it.
+            </p>
+            <br />
+            <p>
+              The song is produced by me in the spirit of pushing the limits of
+              what manipulations I can do to acoustic sounds until it's
+              unbearable. My approach is to be maximalistic, almost
+              overwhelming. There is almost too much percussion. The vocals are
+              languishing: they trail on longer than they need to.
+            </p>
+            <br />
+            <p>
+              Culminating in the
+              <span class="song-ref" data-time="23">lorem ipsum section</span>,
+              the sings follows the progression from simple indulgence to
+              overstimulation to the dissolution of meaning. Lorem ipsum dolor.
+              It's placeholder used when doing graphic design. In the same way
+              that lorem ipsum text is used to give the impression of how copy
+              would look in a design, a growing portion of what we experience,
+              SEO-optimised articles, AI slop, the works, do just that: they
+              approximates meaning. You have to squint, really hard, to see it
+              as anything more than aggregational gobbledygook because what it
+              is lacks true substance. This is Dead Internet Theory. This is a
+              human existence becoming less organic.
+              <br />
+            </p>
+            <p>
+              The opening line of the
+              <span class="song-ref" data-time="23"> chorus</span> interpolates
+              <a href="https://genius.com/Pixies-where-is-my-mind-lyrics"
+                ><em>Where Is My Mind?</em> by the Pixies from their 1988 debut
+                album Surfer Rosa</a
+              >. BEDROOM sweetly sick day borrows the absurdity and in that
+              final chorus, there is a melding of scenarios where the speaker in
+              this "remembers" diving like the speaker in
+              <em>Where Is My Mind?</em> did in the Caribbean.
+            </p>
+            <p>
+              Ultimately, this song is an exploration of our current state of
+              overstimulation and adds to the canon of images that accompany
+              Byung-Chul Han's concept of the achievement-subject ✦
+            </p>
+
+            <!--
+            <div id="flipbook-container">
+              <div id="book">
+                <div class="my-page">
+                  <img src="zines/never/1.jpg" />
+                </div>
+                <div class="my-page">
+                  <img src="zines/never/2.jpg" />
+                </div>
+                <div class="my-page">
+                  <img src="zines/never/3.jpg" />
+                </div>
+                <div class="my-page">
+                  <img src="zines/never/4.jpg" />
+                </div>
+                <div class="my-page">
+                  <img src="zines/never/5.jpg" />
+                </div>
+                <div class="my-page" data-density="hard">
+                  <img src="zines/never/6.jpg" />
+                </div>
+              </div>
+            </div>-->
+          </main>
+        </div>
+        <div class="body-item" id="synopsis">
+          <h2>{ About the Artist }</h2>
+          <p>
+            <img src="images/Profile Photo.jpg" id="profilephoto" />
+            <strong>Jupiterbyrd</strong> <em>(she/her)</em> concerns herself
+            with world-building; everything is in service to the concept and
+            each word is shouted in the language of pop. She participates in the
+            intricacy of real things. Juxtaposed against iridescent
+            instrumentals, her themes are grounded in contemporary realities.
+            She captures anxiety lived collectively. She captures youth lived
+            digitally. She captures moments understood instinctually. With a
+            background in poetry, she finds comfort in layering meaning on top
+            of meaning, yielding lyrics that are vivid, observational and
+            honest.
+          </p>
+          <p>
+            Sonically, she speaks a dialect of pop that's louder, crunchier and
+            almost uncomfortably vulnerable. Jupiterbyrd cherishes being in the
+            tradition of electronica and her music resonates with the style of
+            artists like Dorian Electra and Jane Remover. She employs the
+            high-concept artfulness of Caroline Polachek and FKA Twigs, the
+            melodic prowess of Shygirl and James Mercer of The Shins, and she
+            melds it with the emotional transparency of Pierce The Veil and Issy
+            Wood. Jupiterbyrd takes a Regina Spektoresque poetic voice and
+            morphs it into her particular portrayal of queer black womanhood.
+          </p>
+          <p>
+            Otherworldly and superlative: as her name suggests, Jupiterbyrd
+            conjures worlds, charting constellations glowing against reality's
+            night sky ✦
+          </p>
+        </div>
+        <div class="body-item" id="lyrics">
+          <h2>
+            BEDROOM sweetly sick day<br /><span
+              style="font-style: italic; font-size: 20px; text-transform: none"
+              >by Jupiterbyrd</span
+            >
+          </h2>
+
+          <div id="lyric-container">
+            <div>
+              <p>
+                <span data-time="7"
+                  ><em>serotonin, oxytocin, endorphins & dopamine</em></span
+                >
+              </p>
+              <br />
+              <h4>Verse I</h4>
+              <p>
+                <span data-time="16.5">I’m bright-eyed</span><br />
+                <span data-time="18.5">I’m smiling too wide </span><br />
+                <span data-time="20"
+                  >There's pathological thinking in the ads selling heaven</span
+                ><br />
+                <span data-time="24.5">But if mindstate is chemical then</span
+                ><br />
+                <span data-time="27"> the sickness is all in my head</span>
+              </p>
+              <p>
+                <span data-time="31.5">
+                  all that’s left to feel is effervescent magic</span
+                ><br /><span data-time="35.5">
+                  tickling my flesh and tissues</span
+                ><br />
+                <span data-time="37.5"> lighting my skin and sinews</span>
+              </p>
+              <h4>Prechorus</h4>
+              <p>
+                <span data-time="40"
+                  >so what if I can’t bear a second of silence?</span
+                ><br />
+                <span data-time="45"
+                  >and so what if my inner dialogue’s violent?</span
+                ><br />
+                <span data-time="49"> when it’s decent to believe</span><br />
+                <span data-time="53.5"> this is what it means to be free</span
+                ><br />
+                <span data-time="57"> in this century</span><br />
+                <span data-time="59">
+                  where the people we are, we perform to be seen</span
+                >
+              </p>
+              <h4>Chorus</h4>
+              <p>
+                <span data-time="">
+                  <em>serotonin, oxytocin, endorphins & dopamine</em></span
+                ><br />
+                <span data-time="64"> where is my mind?</span><br /><span
+                  data-time="65.5"
+                >
+                  my heart is seeking pride & pleasure</span
+                ><br /><span data-time="68"> I’m fidgeting forever</span><br />
+                <span data-time="70"> I’m opting out whenever</span><br />
+                <span data-time="72"> I would write songs about life</span
+                ><br />
+                <span data-time="74"> but I don't like going outside</span
+                ><br />
+              </p>
+              <p><span data-time="76"> ♬</span><br /></p>
+
+              <h4>Verse II</h4>
+              <p>
+                <span data-time="87">
+                  all that’s left to feel is the acidic magic </span
+                ><br /><span data-time="91">pickling my blood and body </span
+                ><br /><span data-time="93.5"
+                  >just to keep me buzzed and busy </span
+                ><br />
+              </p>
+              <p>
+                <span data-time="95.5"
+                  >Truly, I can't take my eyes off this tiny phone screen</span
+                ><br />
+                <span data-time="100.5"
+                  >and crucially it mutes the sounds of own screams</span
+                ><br />
+                <span data-time="105"> for eternity</span><br />
+                <span data-time="107">now I'm brighter</span><br />
+                <span data-time="109">and I'm stimulated to high hell</span
+                ><br />
+              </p>
+            </div>
+            <div>
+              <h4>Breakdown</h4>
+              <p>
+                <span data-time="113"> They’re making me feel like a god </span
+                ><br /><span data-time="115.5"
+                  >I know it’s to obscure the many plights of livingkind on this
+                  planet</span
+                ><br /><span data-time="121 " id="extendoride"
+                  >but I'm getting dizzy off this ride</span
+                ><br /><span data-time="125"
+                  >Isn't life lived in between the lines?</span
+                ><br /><span data-time="129"> I wonder how</span><br /><span
+                  data-time="133"
+                  >I smoothed out into the margins</span
+                ><br /><span data-time="136"
+                  >where it’s pure genius to believe</span
+                ><br /><span data-time="142">this is what it means evolve</span>
+                <br /><span data-time="144.5"> in this period </span><br /><span
+                  data-time="146.5"
+                >
+                  where the sharpness of my senses is fading before me</span
+                >
+              </p>
+              <h4>
+                Chorus II<br />
+                "LOREM IPSUM SECTION"
+              </h4>
+              <p>
+                <span data-time="152">where is my mind?</span><br /><span
+                  data-time="153.5"
+                >
+                  my brain is like cotton candy </span
+                ><br /><span data-time="156">
+                  I could have sworn I said a word the same but twice as
+                  easy</span
+                ><br /><span data-time="160"> guess I’m mad when I cry</span
+                ><br /><span data-time="162">
+                  and then there’s more guessing why </span
+                ><br /><span data-time="168">
+                  the four Horsemen are eating my shirt </span
+                ><br /><span data-time="173"
+                  >and you’ve never dived through a surf before </span
+                ><br /><span data-time="177.5">my mouth ipsum dolor </span
+                ><br /><span data-time="179.5">
+                  a skinny dip in eating chocolate ice cream galore</span
+                ><br />
+              </p>
+              <p>
+                <span data-time="184"
+                  ><em>merosmonin, goxydocin, dendortins & lopasine</em></span
+                ><br />
+                <br />
+              </p>
+              <h4>Outro</h4>
+
+              <p>
+                <span data-time="211"> they’re making me feel like a god</span
+                ><span data-time="214"> they’re making me feel like a god</span
+                ><span data-time="216.5">
+                  they’re making me feel like a god</span
+                >
+                <span data-time="219"> they’re making me feel like a god</span>
+                <span data-time="221.5">
+                  they’re making me feel like a god</span
+                >
+                <span data-time="224"> they’re making me feel like a god</span>
+                <span data-time="226.5">
+                  they’re making me feel like a god</span
+                >
+                <span data-time="229"> they’re making me feel like a god</span>
+                <br />
+                <br />
+                <span data-time="231.5">
+                  they’re making me feel like a god</span
+                >
+                <br />
+                <br />
+                <em>x many...</em> ✦
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="body-item" id="music" style="backdrop-filter: none">
+          <div>
+            <iframe
+              data-testid="embed-iframe"
+              style="border-radius: 0px"
+              src="https://open.spotify.com/embed/artist/4mHAEuKUAcJq9P0Xh86QYT?utm_source=generator"
+              width="70%"
+              height="450px"
+              frameborder="0"
+              allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            ></iframe>
+
+            <iframe
+              data-testid="embed-iframe"
+              style="border-radius: 12px"
+              src="https://open.spotify.com/embed/artist/4u8GWU8pFaDm6D2iRVnwI0?utm_source=generator"
+              width="70%"
+              height="450px"
+              frameborder="0"
+              allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+        <div class="body-item" id="visuals">
+          <div class="masonry">
+            <div class="masonry-item">
+              <img src="images/visuals/06.png" alt="Album Cover" />
+            </div>
+            <div class="masonry-item">
+              <img src="images/visuals/01.png" alt="Album Cover" />
+            </div>
+
+            <div class="masonry-item">
+              <img src="images/visuals/02.jpg" alt="Album Cover" />
+            </div>
+            <div class="masonry-item">
+              <img src="images/visuals/03.jpg" alt="Album Cover" />
+            </div>
+            <div class="masonry-item">
+              <img src="images/visuals/04.png" alt="Album Cover" />
+            </div>
+            <div class="masonry-item">
+              <img src="images/visuals/05.jpg" alt="Album Cover" />
+            </div>
+
+            <div class="masonry-item">
+              <img src="images/visuals/07.png" alt="Album Cover" />
+            </div>
+            <div class="masonry-item">
+              <img src="images/visuals/12.jpg" alt="Album Cover" />
+            </div>
+
+            <!-- Magazine page -->
+
+            <div class="masonry-item">
+              <img src="images/visuals/10.png" alt="Album Cover" />
+            </div>
+            <div class="masonry-item">
+              <img src="images/visuals/08.jpg" alt="Magazine Page" />
+            </div>
+
+            <!-- Pinterest embed -->
+
+            <div class="masonry-item">
+              <img src="images/visuals/11.png" alt="Album Cover" />
+            </div>
+            <div class="masonry-item">
+              <img src="images/visuals/09.png" alt="Album Cover" />
+            </div>
+
+            <!-- Wide image -->
+          </div>
+
+          <!--<div>
+            <a
+              data-pin-do="embedBoard"
+              href="https://za.pinterest.com/jupiterbyrd/my-vision-board/"
+              
+              data-pin-board-width="1200px"
+            ></a>
+            <script
+              async
+              type="text/javascript"
+              src="https://assets.pinterest.com/js/pinit.js"
+            ></script>
+          </div>-->
+        </div>
+        <div class="body-item" id="apps">
+          <h3>making my</h3>
+          <div id="app-gallery">
+            <!-- <div class="app-card">
+              <iframe src="https://jupiterbyrd.github.io/spiroquad/"></iframe>
+              <h4>Spiroquad by Jupiterbyrd</h4>
+              <span>In Progress</span>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Eveniet mollitia cupiditate maxime veniam debitis iusto earum
+                tempore odio explicabo repudiandae culpa officia impedit, optio
+                consequatur unde, ad quasi molestiae temporibus sunt nesciunt
+                enim, tenetur quidem assumenda. Sequi quaerat quis repellendus?
+              </p>
+            </div>
+            <div class="app-card">
+              <iframe src="https://jupiterbyrd.github.io/jukebox/"></iframe>
+            </div>
+            <div class="app-card">
+              <iframe
+                src="https://jupiterbyrd.github.io/house-of-ours/"
+              ></iframe>
+            </div>
+            <div class="app-card">
+              <iframe
+                src="https://jupiterbyrd.github.io/thebyrdhouse/"
+              ></iframe>
+            </div>-->
+          </div>
+        </div>
+        <div class="body-item" id="upcoming">
+          <img
+            src="images/BLUEPRINTS/BLUEPRINTS PROGRAMME FRONT.jpg"
+            style="width: 100%"
+          />
+
+          <p>
+            <br />
+            <br />
+            I am planning my first solo live show, BLUEPRINTS. This show emerged
+            out of my desire to capture the structures around the artistic space
+            I'm in. I'm very early in my career; I am at my most uninformed.
+            Yet, here I am building the foundation of my musical and artistic
+            identity, choosing how to present myself, what niche I hope to
+            occupy, what my sound will be and even choosing my name. <br />
+            <br />
+          </p>
+          <p>
+            In a landscape where the internet is forever and you are as much
+            your brand as you are you, this show hopes to explore all of the
+            emotions I feel regarding this. This show will include performances
+            of my singles, some original spoken word pieces, covers and the
+            show's titular song, BLUEPRINTS, that will be released the morning
+            of the show.
+          </p>
+          <h4>Overview</h4>
+          <ul style="font-style: var(--body-font)">
+            Name: BLUEPRINTS
+            <br />Date: Saturday, 15 November 2025<br />
+            Proposed Time: 17h15
+            <br />Length of Show: 1hr 30min<br />
+            Projected Audience Size: 45 people
+          </ul>
+
+          <p>
+            This will be my first solo live show and it's in the very early
+            stages of production. It's being produced by my sister and I. What
+            is particularly exciting about this show is that, to end it off, I
+            will be announcing the title and release day of my debut album:
+            RUMI'S HOUSE OF MINE.
+          </p>
+          <img src="images/visuals/08.jpg" />
+          <p>
+            It's is a project that was born out of my reading of
+            <a href="https://www.scottishpoetrylibrary.org.uk/poem/guest-house/"
+              >The Guesthouse
+            </a>
+            by Sufi poet and scholar Rumi. This album imagines Jupiterbyrd as
+            'Father Jupiterbyrd', custodian of my human, my guesthouse and
+            chronicles what each room contains, what happens within them, who is
+            there and in so doing depicts key parts of my emotion landscape,
+            internal space in an increasingly precarious world. It explores
+            themes of depression, connection & alienation, and, naturally,
+            interiority: what does it feel like to be me.
+          </p>
+          <br />
+          <p>
+            I would love to discuss all thus in person. So much of the project
+            is written and produced and I'd eat up an opportunity to wax poetic
+            about it ✦
+          </p>
+        </div>
+
+        <div class="body-item" id="connect">
+          <section class="socials-grid">
+            <div class="grid-container">
+              <div class="">
+                <h2>Connect with Me</h2>
+                <p>
+                  Yes, I make music but I also code things to support my music.
+                  This site was made from scratch by me with HTML, CSS & JS. I
+                  study Computer Science so connect with me because I'm always
+                  building, building, building!<br />
+                  <br />
+                  Email:
+                  <a href="mailto:thisisjupiterbyrd@gmail.com"
+                    >thisisjupiterbyrd@gmail.com</a
+                  >
+                </p>
+              </div>
+              <div class="grid-card">
+                <img src="icons/instagram.png" alt="Instagram" />
+
+                <span>Visual diary & project updates</span>
+                <a
+                  href="https://instagram.com/thisisjupiterbyrd"
+                  target="_blank"
+                  >@thisisjupiterbyrd</a
+                >
+              </div>
+              <div class="grid-card">
+                <img src="icons/medium.png" alt="Medium" />
+
+                <span>Blog</span>
+                <a
+                  href="https://medium.com/towards-a-lucid-existence/building-the-chromaia-engine-4bd7c389cd6a"
+                  target="_blank"
+                  >Read</a
+                >
+              </div>
+              <div class="grid-card">
+                <img src="icons/spotify.png" alt="Spotify" />
+
+                <span>Listen to my music</span>
+                <a
+                  href="https://open.spotify.com/artist/4mHAEuKUAcJq9P0Xh86QYT?si=e0DbcS25RsuIvddfk_tY_Q"
+                  target="_blank"
+                  >Play</a
+                >
+              </div>
+              <div class="grid-card">
+                <img src="icons/applemusic.png" alt="Apple Music" />
+
+                <span>Listen to my music on Apple Music</span>
+                <a
+                  href="
+                    https://music.apple.com/za/artist/jupiterbyrd/1828181025"
+                  target="_blank"
+                  >Play</a
+                >
+              </div>
+              <div class="grid-card">
+                <img src="icons/youtube.png" alt="Youtube" />
+
+                <span>Youtube</span>
+                <a
+                  href="https://www.youtube.com/@thisisjupiterbyrd"
+                  target="_blank"
+                  >Read</a
+                >
+              </div>
+
+              <div class="grid-card">
+                <img src="icons/substack.png" alt="Substack" />
+
+                <span>Essays, reflections & newsletters</span>
+                <a
+                  href="https://substack.com/@thisisjupiterbyrd?utm_source=user-menu"
+                  target="_blank"
+                  >Read</a
+                >
+              </div>
+
+              <div class="grid-card">
+                <img src="icons/github.png" alt="GitHub" />
+
+                <span>Code for my applets & experiments</span>
+                <a href="https://github.com/jupiterbyrd" target="_blank"
+                  >Explore</a
+                >
+              </div>
+
+              <div class="grid-card">
+                <img src="icons/medium.png" alt="Medium" />
+
+                <span>Blog</span>
+                <a
+                  href="https://medium.com/towards-a-lucid-existence/building-the-chromaia-engine-4bd7c389cd6a"
+                  target="_blank"
+                  >Read</a
+                >
+              </div>
+
+              <div class="grid-card">
+                <img src="icons/genius.png" alt="Genius" />
+
+                <span>Official Lyrics</span>
+                <a href="https://genius.com/Jupiterbyrd" target="_blank"
+                  >Read</a
+                >
+              </div>
+
+              <div class="grid-card">
+                <img src="icons/ultimateguitar.png" alt="Ultimate Guitar" />
+
+                <span>Chords & Lyrics </span>
+                <a
+                  href="https://tabs.ultimate-guitar.com/user/tab/view?h=NTWRkGMwyCnL43eiinMMul1e&tab_id=26909972"
+                  target="_blank"
+                  >Play</a
+                >
+              </div>
+              <div class="grid-card">
+                <img src="icons/tiktok.png" alt="Ultimate Guitar" />
+
+                <span>Coming soon...</span>
+                <a
+                  href="https://www.tiktok.com/@thisisjupiterbyrd"
+                  target="_blank"
+                  >Follow</a
+                >
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <footer>
+      made by me, Jupiterbyrd! with HTML, CSS & JS using that Computer Science
+      degree for something hehe
+    </footer>
+  </body>
+  <script src="lyricsync.js"></script>
+  <script>
+    function openMagazine(id) {
+      document.getElementById("layout").classList.add("sidebar-open");
+
+      let bodies = document.getElementsByClassName("body-item");
+      for (const element of bodies) {
+        element.classList.remove("open");
+        if (id == "demo") {
+        } else {
+        }
+      }
+      bodies = document.getElementsByClassName("menu-button");
+      for (const element of bodies) {
+        element.classList.remove("open");
+      }
+      document.getElementById(id).classList.add("open");
+      document.getElementById(id + "-menu").classList.add("open");
+      document.getElementById("long-logo").src =
+        "images/jupiterbyrd-logo-long-solid.svg";
+      document.getElementById("menu-player").classList.remove("big");
+      document.getElementById("menu-player").classList.add("small");
+    }
+
+    function closeSidebar() {
+      document.getElementById("layout").classList.remove("sidebar-open");
+      document.getElementById("long-logo").src =
+        "images/jupiterbyrd-logo-long-outline.svg";
+      document.getElementById("menu-player").classList.remove("small");
+      document.getElementById("menu-player").classList.add("big");
+    }
+  </script>
+
+  <script type="module"></script>
+  <script type="module" src="script.js"></script>
+  <script src="audio-controller.js"></script>
+  <script>
+    const move = document.getElementById("filter");
+    document.body.onpointermove = (event) => {
+      const { clientX, clientY } = event;
+
+      move.animate(
+        {
+          left: `${clientX}px`,
+          top: `${clientY}px`,
+        },
+        { duration: 500, fill: "forwards" }
+      );
+    };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/stpageflip@2.0.4/dist/js/page-flip.browser.min.js"></script>
+</html>
