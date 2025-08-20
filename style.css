@@ -682,6 +682,17 @@ background-color: transparent ;
     display: none;
   }
 }
+@media only screen and (max-width: 900px){
+#layout {
+  width:100vw;
+}
+#layout.sidebar-open #sidebar {
+  width: 100vw;
+}
+#layout.sidebar-open #main-menu {
+  width: 100vw;
+}
+}
 @media only screen and (max-width: 600px) {
   body {
     font-size: 13px;
